@@ -22,7 +22,7 @@ def ensureins():
         if _platform == "linux" or _platform == "linux2":
             # linux
             try:
-                callcmd("sudo dpkg -i PACKAGE.deb", shell=True)
+                callcmd("sudo dpkg -i mysql/debian.deb", shell=True)
             except:
                 proclab.config(text="The package could not be installed. Please run Zeus with sudo privileges to continue.")
                 inswin.update()
