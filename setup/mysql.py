@@ -2,6 +2,7 @@ from sys import platform as _platform
 from subprocess import check_output as callcmd
 import tkinter as tk
 import tkinter.ttk as ttk
+import os
 
 def installed():
     "Checks if the module is installed"
@@ -24,7 +25,7 @@ def ensureins():
         if _platform == "linux" or _platform == "linux2":
             # linux
             try:
-                callcmd("sudo dpkg -i mysql/debian.deb", shell=True)
+                callcmd(["sudo", "dpkg", "-i", "mysql/debian.deb"])
             except:
                 proclab.config(text="The package could not be installed. Please run Zeus with sudo privileges to continue.")
                 inswin.update()
@@ -44,7 +45,7 @@ def ensureins():
         elif _platform == "win32":
             # Windows
             try:
-                callcmd("msiexec /i mysql/windows32.msi", shell=True)
+                os.system(os.path.dirname(os.path.realpath(__file__)) + "/mysql.bat")
             except:
                 proclab.config(text="Could not install the package. Please get administrator privileges to continue.")
                 inswin.update()
@@ -53,7 +54,7 @@ def ensureins():
         elif _platform == "win64":
             # Windows 64-bit
             try:
-                callcmd("msiexec /i mysql/windows64.msi", shell=True)
+                os.system(os.path.dirname(os.path.realpath(__file__)) + "/mysql.bat")
             except:
                 proclab.config(text="Could not install the package. Please get administrator privileges to continue.")
                 inswin.update()
