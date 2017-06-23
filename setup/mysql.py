@@ -4,6 +4,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 def installed():
+    "Checks if the module is installed"
     try:
         import mysql.connector
     except ImportError:
@@ -12,6 +13,7 @@ def installed():
         return true
 
 def ensureins():
+    "Ensures that the module is ready to be used"
     if not installed():
         inswin = tk.Tk()
         inswin.title("Install MySQL Connector")
@@ -34,6 +36,7 @@ def ensureins():
 
                            Go to the Zeus A3 installation directory. Then, navigate down into the setup folder - then into mysql. Open macos.dmg, then run the .pkg file by double-clicking it.""")
             def cont():
+                "Destroys the window"
                 inswin.destroy()
             contbutton = ttk.Button(inswin, text="Continue", command=cont, state="disabled")
             contbutton.grid(row=1, sticky=tk.E+tk.W)
