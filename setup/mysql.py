@@ -18,7 +18,7 @@ def ensureins():
         proclab = tk.Message(inswin, text="Please wait while Zeus installs the database connection library.")
         proclab.grid(row=0)
         inswin.update()
-        
+
         if _platform == "linux" or _platform == "linux2":
             # linux
             try:
