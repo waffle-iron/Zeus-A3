@@ -45,7 +45,7 @@ def ensureins():
         elif _platform == "win32":
             # Windows
             try:
-                os.system(os.path.dirname(os.path.realpath(__file__)) + "/mysql.bat")
+                os.system("mysql.bat")
             except:
                 proclab.config(text="Could not install the package. Please get administrator privileges to continue.")
                 inswin.update()
