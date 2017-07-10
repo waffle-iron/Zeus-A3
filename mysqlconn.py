@@ -1,3 +1,5 @@
+"""Defines mysqlconn.cnx as a connection to the database."""
+
 import config
 import mysql.connector
 
