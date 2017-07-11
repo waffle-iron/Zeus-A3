@@ -4,6 +4,13 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import os
 
+try:
+    import rollbar
+except:
+    ROLLBAR = False
+else:
+    ROLLBAR = True
+
 def installed():
     "Checks if the module is installed"
     try:
@@ -27,9 +34,10 @@ def ensureins():
             try:
                 callcmd(["sudo", "dpkg", "-i", "mysql/debian.deb"])
             except:
-                proclab.config(text="The package could not be installed. Please run Zeus with sudo privileges to continue.")
-                inswin.update()
-            else:
+                if ROLLBAR:
+                    rollbar.report_exc_info()                   
+                proclab.config(text="The package could not be installed. Please run Zeus with sudo 
+            privileges to continue.") inswin.update() else:
                 inswin.destroy()
         elif _platform == "darwin":
             # MAC OS X
@@ -47,6 +55,8 @@ def ensureins():
             try:
                 os.system("mysql.bat")
             except:
+                if ROLLBAR:
+                    rollbar.report_exec_info()
                 proclab.config(text="Could not install the package. Please get administrator privileges to continue.")
                 inswin.update()
             else:
@@ -56,6 +66,8 @@ def ensureins():
             try:
                 os.system(os.path.dirname(os.path.realpath(__file__)) + "/mysql.bat")
             except:
+                if ROLLBAR:
+                    rollbar.report_exec_info()
                 proclab.config(text="Could not install the package. Please get administrator privileges to continue.")
                 inswin.update()
             else:
