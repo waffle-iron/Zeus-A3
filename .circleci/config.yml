@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run: tar -cvf "./${CIRCLE_SHA1}.tar" ./
       - persist_to_workspace:
-          root: .
+          root: workspace
           paths:
             - /tmp/zeuspack
   deploy_package:
