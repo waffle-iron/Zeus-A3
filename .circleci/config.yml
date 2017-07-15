@@ -23,10 +23,10 @@ jobs:
   pythoncompile:
     working_directory: /tmp/Zeus
     docker:
-      - image: buildpack-deps
+      - image: buildpack-deps:trusty
     steps:
       - checkout
-      - run: python3 -m compileall
+      - run: python3 -m compileall /tmp/Zeus/
 workflows:
   version: 2
   buildtestdeploy:
