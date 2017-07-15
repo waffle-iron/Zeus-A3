@@ -20,6 +20,13 @@ jobs:
       - attach_workspace:
           at: /tmp/Zeus
       - run: ncftpput -V -u "zeusarchiver@kolechia.heliohost.org" -p "CircleCI" ftp.kolechia.heliohost.org "./" "${CIRCLE_SHA1}.tar"
+  pythoncompile:
+    working_directory: /tmp/Zeus
+    docker:
+      - image: buildpack-deps
+    steps:
+      - checkout
+      - run: python3 -m compileall
 workflows:
   version: 2
   buildtestdeploy:
@@ -28,3 +35,4 @@ workflows:
       - deploy_package:
           requires:
             - package
+      - pythoncompile
