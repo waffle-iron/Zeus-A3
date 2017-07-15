@@ -3,7 +3,7 @@ jobs:
   package:
     working_directory: ~/Zeus/
     docker:
-      image: buildpack-deps:trusty
+      - image: buildpack-deps:trusty
     steps:
       - checkout
       - run: tar -cvf "./${CIRCLE_SHA1}.tar" ./
@@ -14,7 +14,7 @@ jobs:
   deploy_package:
     working_directory: ~/Zeus/
     docker:
-      image: buildpack-deps:trusty
+      - image: buildpack-deps:trusty
     steps:
       - run: sudo apt-get install ncftp
       - attach_workspace:
