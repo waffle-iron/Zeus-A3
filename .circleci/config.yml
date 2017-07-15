@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  package:
+    working_directory: /tmp/Zeus/
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run: tar -cvf "./${CIRCLE_SHA1}.tar" ./
+      - persist_to_workspace:
+          root: /tmp/Zeus
+          paths:
+            - ./
+  deploy_package:
+    working_directory: /tmp/Zeus
+    docker:
+      - image: circleci/php:7
+    steps:
+      - run: sudo apt-get install ncftp
+      - attach_workspace:
+          at: /tmp/Zeus
+      - run: ncftpput -V -u "zeusarchiver@kolechia.heliohost.org" -p "CircleCI" ftp.kolechia.heliohost.org "./" "${CIRCLE_SHA1}.tar"
+workflows:
+  version: 2
+  buildtestdeploy:
+    jobs:
+      - package
+      - deploy_package:
+          requires:
+            - package
