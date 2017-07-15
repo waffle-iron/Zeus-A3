@@ -1,7 +1,7 @@
 version: 2
 jobs:
   package:
-    working_directory: ~/Zeus/
+    working_directory: /tmp/Zeus/
     docker:
       - image: buildpack-deps:trusty
     steps:
@@ -10,9 +10,9 @@ jobs:
       - persist_to_workspace:
           root: /tmp/zeuspack
           paths:
-            - ~/Zeus/
+            - /tmp/Zeus/
   deploy_package:
-    working_directory: ~/Zeus/
+    working_directory: /tmp/Zeus
     docker:
       - image: buildpack-deps:trusty
     steps:
