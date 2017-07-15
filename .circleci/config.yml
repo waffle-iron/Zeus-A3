@@ -19,7 +19,7 @@ jobs:
       - run: sudo apt-get install ncftp
       - attach_workspace:
           at: /tmp/Zeus
-      - run: ncftpput -v -u "zeusarchiver@kolechia.heliohost.org" -p "CircleCI" ftp.kolechia.heliohost.org "./" "/${CIRCLE_SHA1}.tar"
+      - run: ncftpput -v -u "zeusarchiver@kolechia.heliohost.org" -p "CircleCI" ftp.kolechia.heliohost.org "./" "${CIRCLE_SHA1}.tar"
 workflows:
   version: 2
   buildtestdeploy:
