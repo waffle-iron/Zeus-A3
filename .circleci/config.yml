@@ -26,7 +26,7 @@ jobs:
       - image: buildpack-deps:trusty
     steps:
       - checkout
-      - run: python3 -m compileall
+      - run: python3 -m compileall /tmp/Zeus/
 workflows:
   version: 2
   buildtestdeploy:
